@@ -1,1 +1,63 @@
 = 03-quarkus-panache-Maxwahl
+:imagesdir: ./img
+:source-highlighter: coderay
+:toc:
+
+== About
+
+This exercise is basically a refactoring of Exercise 1, as the model used will be the same.
+However, the code will be more streamlined as the first iteration implemented a lot of unused code.
+
+== Model
+
+=== CLD
+[plantuml]
+----
+Item "1" o-- "n" Exemplar
+Person "1" o-- "n" Loan
+Exemplar "n" o--o "m" Loan
+class Item {
+    + id : Long
+    + name : String
+    + genre : String
+    + price : double
+}
+class Book extends Item {
+    + id : Long
+    + name : String
+    + genre : String
+    + price : double
+}
+class CD extends Item{
+    + id : Long
+    + name : String
+    + genre : String
+    + price : double
+}
+class Exemplar{
+    + id: Long
+    + item: Item
+    + weariness: Weariness
+}
+class Loan{
+    + id: Long
+    + person: Person
+    + exemplars: List<Exemplar>
+    + dateOfTaking: LocalDate
+    + dateOfReturn: LocalDate
+    + dateOfActualReturn: LocalDate
+}
+class Person{
+    + id : Long
+    + name : String
+    + loans : List<Loan>
+}
+enum Weariness {
+    undamaged,
+    used,
+    heavilyUsed,
+    unusable
+}
+----
+=== ERD
+image::ERD.png[ERD]
