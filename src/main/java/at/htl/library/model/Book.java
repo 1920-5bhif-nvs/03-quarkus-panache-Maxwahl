@@ -1,9 +1,20 @@
 package at.htl.library.model;
 
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "Book.findById",query = "select i from Book i where i.Id= :Id"),
+})
+@JsonTypeName("book")
 public class Book extends Item{
     String author;
     int pages;
@@ -16,6 +27,17 @@ public class Book extends Item{
     }
 
     public Book() {
+    }
+
+    @Override
+    public ObjectNode jsonify(ObjectNode objectNode) {
+        objectNode.put("id",this.getId());
+        objectNode.put("name",this.getName());
+        objectNode.put("genre",this.getGenre());
+        objectNode.put("price",this.getPrice());
+        objectNode.put("author",this.getAuthor());
+        objectNode.put("pages",this.getPages());
+        return objectNode;
     }
     //endregion
 

@@ -2,18 +2,21 @@ package at.htl.library.model;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Loan.findById",query = "select l from Loan l where l.Id= :Id"),
-        @NamedQuery(name = "Loan.findAll",query = "select l from Loan l")
+        @NamedQuery(name = "Loan.findAll",query = "select l from Loan l"),
+        @NamedQuery(name="Loan.unfinishedByPerson",query = "select l from Loan l where l.person.Id=:Id and l.doAR IS null"),
+        @NamedQuery(name="Loan.unfinished",query = "select l from Loan l where l.doAR IS null")
 })
+@XmlRootElement
 public class Loan {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
-    @JsonbTransient
     @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.MERGE})
     Person person;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)

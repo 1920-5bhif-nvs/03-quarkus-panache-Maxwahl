@@ -1,5 +1,7 @@
 package at.htl.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
         @NamedQuery(name = "Person.findById",query = "select p from Person p where p.Id= :Id"),
         @NamedQuery(name = "Person.findAll",query = "select p from Person p")
 })
-public class Person {
+public class    Person {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
     String name;
@@ -21,6 +23,10 @@ public class Person {
     public Person() {
     }
 
+    public Long getId() {
+        return Id;
+    }
+
     public String getName() {
         return name;
     }
@@ -28,7 +34,7 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-
+    @JsonIgnore
     public List<Loan> getLoans() {
         return loans;
     }

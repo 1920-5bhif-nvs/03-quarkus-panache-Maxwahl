@@ -1,7 +1,16 @@
 package at.htl.library.model;
 
 
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import javax.json.JsonValue;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +18,16 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NamedQueries({
         @NamedQuery(name = "Item.findById",query = "select i from Item i where i.Id= :Id"),
-        @NamedQuery(name = "Item.findAll",query = "select i from Item i")
+        @NamedQuery(name = "Item.findAll",query = "select i from Item i"),
+        @NamedQuery(name="Item.getStats",query = "select i,count(i.id) from Loan l join l.exemplars e join e.item i group by i.id order by count(i.id) desc")
+        //select e.item_id,count(*) from loan_exemplar le join exemplar e on le.exemplars_id = e.id group by e.item_id
 })
+@XmlRootElement
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS ,include = JsonTypeInfo.As.PROPERTY, property = "class")
+@JsonSubTypes({
+
+        @JsonSubTypes.Type(value = CD.class, name = "cd"),
+        @JsonSubTypes.Type(value = Book.class, name = "book")})
 public abstract class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +58,6 @@ public abstract class Item {
     //endregion
 
     //region getter and setter
-
     public Long getId() {
         return Id;
     }
@@ -76,5 +92,7 @@ public abstract class Item {
     public void addExemplar(Exemplar exemplar){
         this.exemplars.add(exemplar);
     }
+
+    public abstract ObjectNode jsonify(ObjectNode objectNode);
 //endregion
 }

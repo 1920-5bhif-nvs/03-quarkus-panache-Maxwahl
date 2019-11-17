@@ -2,15 +2,18 @@ package at.htl.library.model;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@XmlRootElement
+@NamedQuery(name = "Exemplar.findById",query = "select e from Exemplar e where e.Id= :Id")
 public class Exemplar {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     Item item;
     @Enumerated(EnumType.STRING)
     Weariness weariness;
@@ -24,6 +27,11 @@ public class Exemplar {
         this.weariness = weariness;
         loans = new ArrayList<>();
         item.addExemplar(this);
+    }
+
+    public Exemplar(Item item) {
+        this.item = item;
+        this.weariness = Weariness.undamaged;
     }
 
     public Exemplar() {
@@ -59,4 +67,15 @@ public class Exemplar {
         loans.add(loan);
     }
     //endregion
+
+
+    @Override
+    public String toString() {
+        return "Exemplar{" +
+                "Id=" + Id +
+                ", item=" + item +
+                ", weariness=" + weariness +
+                ", loans=" + loans +
+                '}';
+    }
 }

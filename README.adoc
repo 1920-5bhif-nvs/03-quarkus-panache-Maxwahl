@@ -59,5 +59,92 @@ enum Weariness {
     unusable
 }
 ----
+Description: The library has Exemplars of different Items ( CDs or Books in stock). A Person can make Loan containing various Exemplars.
+
 === ERD
 image::ERD.png[ERD]
+
+== Use Cases
+[plantuml]
+----
+
+actor customer as "Customer"
+actor librarian as "Librarian"
+
+usecase UC1 as "Loan-Statistics"
+usecase UC2 as "Inventory-Expansion"
+usecase UC3 as "View open Loans"
+usecase UC4 as "Self-return of Loan"
+
+librarian --> UC1
+librarian --> UC2
+librarian --> UC3
+
+customer --> UC4
+----
+Description:
+
+1. Loan Statistics:
+    A librarian wants to know which _Items_ are lend out the most.
+
+2. Inventory-Expansion:
+    A librarian wants to add new _Items_ to the Library, and register multiple new _Exemplars_.
+
+3. View open Loans:
+    A librarian wants to know which _Loans_ of a specific _Person_ are currently open.
+
+4. Self-return of Loan:
+    A customer wants to return a _Loan_ by himself.
+
+=== ReST-API
+
+UC1:
+[source, shell]
+----
+curl -X GET http://localhost:8080/items/ranking
+----
+
+UC2a (Add a new Item):
+
+CD
+[source, shell]
+----
+curl -X POST http://localhost:8080/items -H 'Content-Type: application/json' -d '{"name": "Primo Victoria","genre": "Power Metal","price": 10.0,"composer": "Sabaton","runtime": 61.0,"class": "at.htl.library.model.CD"}'
+----
+
+Book
+[source, shell]
+----
+curl -X POST http://localhost:8080/items -H 'Content-Type: application/json' -d '{"name": "What if","genre": "science/comedy","price": 10.0,"author": "Randall Munroe","pages": 400,"class": "at.htl.library.model.Book"}'
+----
+
+The reason why the _class_ field is needed is because the Endpoint receives _Items_ and Jackson needs this attribute to decide which sublass it needs to deserialize to.
+
+UC2a (Add a new Exemplar):
+[source, shell]
+----
+curl -X PUT http://localhost:8080/items/exemplar -H 'Content-Type: application/json' -d '{"id":4,"class": "at.htl.library.model.CD"}'
+----
+WARNING: Be sure to use _Item_-ids that exist in your app-run, although, the provided examples work.
+
+The __Item_ has to be added in its minimal form - the id, and for Jackson the class is needed again.
+
+UC3:
+[source, shell]
+----
+curl -X GET http://localhost:8080/loans/person/1
+----
+WARNING: Be sure to use _Person_-ids that exist in your app-run, although, the provided examples work.
+
+
+The _Person_-id is needed as a PathParam
+
+UC4:
+[source, shell]
+----
+curl -X POST http://localhost:8080/loans/finish -H 'Content-Type: application/json' -d '[{"id": 1},{"id": 5}]'
+----
+
+WARNING: Be sure to use _Exemplar_-ids that exist in your app-run, although, the provided examples work.
+
+The _Exemplar_ has to be added in its minimal form - the id
