@@ -14,10 +14,11 @@ public class Exemplar {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
     @ManyToOne(fetch = FetchType.EAGER)
+            @JoinColumn(name = "item_id")
     Item item;
     @Enumerated(EnumType.STRING)
     Weariness weariness;
-    @ManyToMany(mappedBy = "exemplars",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "exemplars")
             @JsonbTransient
     List<Loan> loans;
 
@@ -70,6 +71,14 @@ public class Exemplar {
     }
     //endregion
 
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
 
     @Override
     public String toString() {

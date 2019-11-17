@@ -7,11 +7,10 @@ import at.htl.library.model.Item;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.List;
 
@@ -19,12 +18,17 @@ import java.util.List;
 public class ItemDao {
 
     @PersistenceContext
-    EntityManager em;
+    public EntityManager em;
 
 
     public List<Item> get() {
-        TypedQuery<Item> entities = em.createNamedQuery("Item.findAll",Item.class);
-        return  entities.getResultList();
+        try{
+            TypedQuery<Item> entities = em.createNamedQuery("Item.findAll",Item.class);
+            return  entities.getResultList();
+        }catch (org.hibernate.QueryTimeoutException ignored){
+            System.out.println("null");
+            return null;
+        }
     }
 
     public List<Object[]> getStatistics() {
@@ -51,8 +55,13 @@ public class ItemDao {
     }
     @Transactional
     public CD saveCD(CD entity) {
-        em.persist(entity);
-        return entity;
+        try {
+            em.persist(entity);
+            return entity;
+        } catch (PessimisticLockException ignored){
+            return null;
+        }
+
     }
     @Transactional
     public Exemplar saveExemplar(Item entity) {

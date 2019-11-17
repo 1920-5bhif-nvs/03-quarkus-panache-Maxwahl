@@ -204,6 +204,9 @@ To run this project in production start script
 It starts the database as a docker container, builds an image for the project, and starts
 a container of the image.
 
+WARNING: Because of a Hibernate-bug, tests sometimes fail, so just run build again and eventually it will work.
+
+
 == Database Connection in Intellij
 
 Create a datasource of type PostgreSQL like in the image:

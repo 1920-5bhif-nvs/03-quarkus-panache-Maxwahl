@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 public class ExemplarDao {
 
     @PersistenceContext
-    EntityManager em;
+    public EntityManager em;
 
     public Exemplar get(long id) {
         TypedQuery<Exemplar> entities = em.createNamedQuery("Exemplar.findById",Exemplar.class);

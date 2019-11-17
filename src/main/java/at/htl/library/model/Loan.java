@@ -20,6 +20,10 @@ public class Loan {
     @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.MERGE})
     Person person;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "loan_exemplar",
+            joinColumns = @JoinColumn(name = "loan_id"),
+            inverseJoinColumns = @JoinColumn(name = "exemplar_id")
+    )
     List<Exemplar> exemplars;
     LocalDate doT;
     LocalDate doAR;
