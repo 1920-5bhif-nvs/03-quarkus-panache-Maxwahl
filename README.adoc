@@ -120,7 +120,7 @@ curl -X POST http://localhost:8080/items -H 'Content-Type: application/json' -d 
 
 The reason why the _class_ field is needed is because the Endpoint receives _Items_ and Jackson needs this attribute to decide which sublass it needs to deserialize to.
 
-UC2a (Add a new Exemplar):
+UC2b (Add a new Exemplar):
 [source, shell]
 ----
 curl -X PUT http://localhost:8080/items/exemplar -H 'Content-Type: application/json' -d '{"id":4,"class": "at.htl.library.model.CD"}'
