@@ -43,17 +43,12 @@ public abstract class Item {
         this.name = name;
         this.genre=genre;
         this.price = price;
-        exemplars=new ArrayList<>();
+        this.exemplars=new ArrayList<>();
 
-        /*
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("file.txt"));
-        //language=JSON
-        String someJson = "{\"name\": \"Maximilian\"}";
-        ArrayList elements = new ArrayList(3);
-        */
     }
 
     public Item() {
+        this.exemplars=new ArrayList<>();
     }
     //endregion
 

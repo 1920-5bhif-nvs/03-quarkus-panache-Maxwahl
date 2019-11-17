@@ -21,16 +21,18 @@ public class InitBean {
     @Transactional
     void init(@Observes StartupEvent event){
         System.err.print("******** hello");
-        CD cd =new CD("test",9.11,"classic","mozart",123.1);
+        CD cd =new CD("Eine kleine Nachtmusik",9.11,"classic","Mozart",123.1);
         CD cd2 = new CD("The Great War",15.00,"Power Metal","Sabaton",48.5);
         em.persist(cd);
         em.persist(cd2);
         Book book = new Book("How TO",18.00,"non-fiction/comedy/science","Randall Munroe",306);
+
         em.persist(book);
         Person p = new Person("Meier");
         Person p2 = new Person("Hofer");
         em.persist(p);
         em.persist(p2);
+        em.flush();
         Exemplar e = new Exemplar(cd, Weariness.undamaged);
         Exemplar e2 = new Exemplar(cd,Weariness.used);
         Exemplar e3 = new Exemplar(cd2,Weariness.heavilyUsed);

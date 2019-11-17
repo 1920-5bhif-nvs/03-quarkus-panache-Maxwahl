@@ -180,3 +180,13 @@ have to write boilerplate code, which is always nice.
 
 But not everything is perfect: There are a lot of missing features which would be great and make Panache SO much better than Hibernate;
 Current Documentation is very little and lacks a lot of "new" features.
+
+
+
+
+
+== OpenAPI / Swagger
+
+OpenAPI-Specifications at `localhost:8080/openapi`.
+
+User interface is available at `localhost:8080/swagger-ui`.

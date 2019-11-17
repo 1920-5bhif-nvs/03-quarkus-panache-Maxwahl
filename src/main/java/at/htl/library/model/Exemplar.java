@@ -23,7 +23,7 @@ public class Exemplar {
 
     //region constructors
     public Exemplar(Item item, Weariness weariness) {
-        this.item = item;
+        this.setItem(item);
         this.weariness = weariness;
         loans = new ArrayList<>();
         item.addExemplar(this);
@@ -32,6 +32,8 @@ public class Exemplar {
     public Exemplar(Item item) {
         this.item = item;
         this.weariness = Weariness.undamaged;
+        loans = new ArrayList<>();
+        item.addExemplar(this);
     }
 
     public Exemplar() {
