@@ -181,9 +181,42 @@ have to write boilerplate code, which is always nice.
 But not everything is perfect: There are a lot of missing features which would be great and make Panache SO much better than Hibernate;
 Current Documentation is very little and lacks a lot of "new" features.
 
+== Running
 
+=== Running in DevMode
 
+To run this project in dev-mode start script
+[source, shell]
+----
+./rundev.sh
+----
 
+It starts the database as a docker container and the quarkus project in dev mode.
+
+=== Running in Production
+
+To run this project in production start script
+[source, shell]
+----
+./runprod.sh
+----
+
+It starts the database as a docker container, builds an image for the project, and starts
+a container of the image.
+
+== Database Connection in Intellij
+
+Create a datasource of type PostgreSQL like in the image:
+
+image::DB.png[DBCinIntellij]
+
+credentials are:
+
+- DB: library
+- User: library
+- PW: passme
+- Hostnam: localhost
+- Port: 5432
 
 == OpenAPI / Swagger
 
