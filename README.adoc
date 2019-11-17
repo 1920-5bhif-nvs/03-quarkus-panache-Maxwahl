@@ -215,11 +215,11 @@ credentials are:
 - DB: library
 - User: library
 - PW: passme
-- Hostnam: localhost
+- Hostname: localhost
 - Port: 5432
 
 == OpenAPI / Swagger
 
-OpenAPI-Specifications at `localhost:8080/openapi`.
+OpenAPI-Specification at `localhost:8080/openapi`.
 
 User interface is available at `localhost:8080/swagger-ui`.
