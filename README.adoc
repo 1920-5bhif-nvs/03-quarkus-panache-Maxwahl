@@ -148,3 +148,35 @@ curl -X POST http://localhost:8080/loans/finish -H 'Content-Type: application/js
 WARNING: Be sure to use _Exemplar_-ids that exist in your app-run, although, the provided examples work.
 
 The _Exemplar_ has to be added in its minimal form - the id
+
+== Panache vs Hibernate
+
+This project includes implementations for both frameworks.
+
+=== PanacheEntity vs PanacheRepository
+
+First of all, deciding on how to use Panache is quite straightforward.
+
+If your projects just needs basic CRUD-operations there is no reason not to use PanacheEntity
+(except having inheritance), but if there are some complicated transactions or you want to follow
+the familiar Repository/Dao concept, PanacheRepository is just fine.
+
+=== Code vs Queries
+
+The biggest factor when deciding between Hibernate and Panache is certainly the JPQL-affinity of the programmer.
+When using Hibernate (JPQL), the programmer basically has the full might of SQL available at his hand. If he so pleases,
+he can write extremely complex queries that handle grouping,joining and ordering out of the box.
+
+This also makes the code look more clean, as the "Database-Operation" is self-contained and separated from other code.
+
+PanacheRepositories on the other hand, just feel like simple List/Stream manipulation and therefore are easy to implement
+and make "queries" more understandable/readable for "newbie"-programmers.
+
+=== Verdict
+
+In my case, using PanacheRepositories was faster when implementing. This might be related to doing the hard work of
+designing the "query" when implementing Hibernate first. However, Panaches injected implementation of basic stuff feels great because you don't
+have to write boilerplate code, which is always nice.
+
+But not everything is perfect: There are a lot of missing features which would be great and make Panache SO much better than Hibernate;
+Current Documentation is very little and lacks a lot of "new" features.

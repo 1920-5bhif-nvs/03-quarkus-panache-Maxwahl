@@ -1,6 +1,7 @@
 package at.htl.library.rest;
 
 import at.htl.library.business.LoanDao;
+import at.htl.library.business.LoanDaoPan;
 import at.htl.library.model.Exemplar;
 import at.htl.library.model.Loan;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class LoanEndpoint {
     @Inject
-    LoanDao loanDao;
+    LoanDaoPan loanDao;
 
 
     @GET

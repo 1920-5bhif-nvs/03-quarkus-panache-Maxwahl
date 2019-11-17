@@ -89,4 +89,16 @@ public class Loan {
         exemplar.addLoan(this);
     }
     //endregion
+
+
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "Id=" + Id +
+                ", person=" + person +
+                ", doT=" + doT +
+                ", doAR=" + doAR +
+                ", doR=" + doR +
+                '}';
+    }
 }

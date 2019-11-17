@@ -2,6 +2,7 @@ package at.htl.library.rest;
 
 
 import at.htl.library.business.ItemDao;
+import at.htl.library.business.ItemDaoPan;
 import at.htl.library.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -22,7 +23,7 @@ import java.util.*;
 public class ItemEndpoint {
 
     @Inject
-    ItemDao itemDao;
+    ItemDaoPan itemDao;
 
     @Path("/ranking")
     @GET
