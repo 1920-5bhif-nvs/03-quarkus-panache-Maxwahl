@@ -11,7 +11,7 @@ However, the code will be more streamlined as the first iteration implemented a 
 == Model
 
 === CLD
-![cld](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/1920-5bhif-nvs/03-quarkus-panache-Maxwahl/master/assets/cld.iuml)
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/1920-5bhif-nvs/03-quarkus-panache-Maxwahl/master/assets/cld.iuml[CLD]
 
 Description: The library has Exemplars of different Items ( CDs or Books in stock). A Person can make Loan containing various Exemplars.
 
