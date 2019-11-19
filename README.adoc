@@ -11,7 +11,7 @@ However, the code will be more streamlined as the first iteration implemented a 
 == Model
 
 === CLD
-image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/1920-5bhif-nvs/03-quarkus-panache-Maxwahl/master/assets/cld.iuml[CLD]
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/1920-5bhif-nvs/03-quarkus-panache-Maxwahl/master/assets/cld.iuml[CLD]
 
 Description: The library has Exemplars of different Items ( CDs or Books in stock). A Person can make Loan containing various Exemplars.
 
@@ -19,23 +19,8 @@ Description: The library has Exemplars of different Items ( CDs or Books in stoc
 image::ERD.png[ERD]
 
 == Use Cases
-[plantuml]
-----
+image::http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/1920-5bhif-nvs/03-quarkus-panache-Maxwahl/master/assets/uc.iuml[UC]
 
-actor customer as "Customer"
-actor librarian as "Librarian"
-
-usecase UC1 as "Loan-Statistics"
-usecase UC2 as "Inventory-Expansion"
-usecase UC3 as "View open Loans"
-usecase UC4 as "Self-return of Loan"
-
-librarian --> UC1
-librarian --> UC2
-librarian --> UC3
-
-customer --> UC4
-----
 Description:
 
 1. Loan Statistics:

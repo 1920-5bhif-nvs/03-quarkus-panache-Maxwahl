@@ -1,0 +1,15 @@
+@startuml
+actor customer as "Customer"
+actor librarian as "Librarian"
+
+usecase UC1 as "Loan-Statistics"
+usecase UC2 as "Inventory-Expansion"
+usecase UC3 as "View open Loans"
+usecase UC4 as "Self-return of Loan"
+
+librarian --> UC1
+librarian --> UC2
+librarian --> UC3
+
+customer --> UC4
+@enduml
