@@ -11,54 +11,8 @@ However, the code will be more streamlined as the first iteration implemented a 
 == Model
 
 === CLD
-[plantuml]
-----
-Item "1" o-- "n" Exemplar
-Person "1" o-- "n" Loan
-Exemplar "n" o--o "m" Loan
-class Item {
-    + id : Long
-    + name : String
-    + genre : String
-    + price : double
-}
-class Book extends Item {
-    + id : Long
-    + name : String
-    + genre : String
-    + price : double
-}
-class CD extends Item{
-    + id : Long
-    + name : String
-    + genre : String
-    + price : double
-}
-class Exemplar{
-    + id: Long
-    + item: Item
-    + weariness: Weariness
-}
-class Loan{
-    + id: Long
-    + person: Person
-    + exemplars: List<Exemplar>
-    + dateOfTaking: LocalDate
-    + dateOfReturn: LocalDate
-    + dateOfActualReturn: LocalDate
-}
-class Person{
-    + id : Long
-    + name : String
-    + loans : List<Loan>
-}
-enum Weariness {
-    undamaged,
-    used,
-    heavilyUsed,
-    unusable
-}
-----
+![cld](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.github.com/1920-5bhif-nvs/03-quarkus-panache-Maxwahl/master/assets/cld.iuml)
+
 Description: The library has Exemplars of different Items ( CDs or Books in stock). A Person can make Loan containing various Exemplars.
 
 === ERD
@@ -127,7 +81,7 @@ curl -X PUT http://localhost:8080/items/exemplar -H 'Content-Type: application/j
 ----
 WARNING: Be sure to use _Item_-ids that exist in your app-run, although, the provided examples work.
 
-The __Item_ has to be added in its minimal form - the id, and for Jackson the class is needed again.
+The _Item_ has to be added in its minimal form - the id, and for Jackson the class is needed again.
 
 UC3:
 [source, shell]
