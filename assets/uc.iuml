@@ -1,15 +1,23 @@
 @startuml
+left to right direction
+skinparam packageStyle rectangle
+
 actor customer as "Customer"
 actor librarian as "Librarian"
+
+rectangle Library{
 
 usecase UC1 as "Loan-Statistics"
 usecase UC2 as "Inventory-Expansion"
 usecase UC3 as "View open Loans"
 usecase UC4 as "Self-return of Loan"
-
-librarian --> UC1
-librarian --> UC2
-librarian --> UC3
-
+usecase UC2a as "Adding Items"
+usecase UC2b as "Adding Exemplars"
+}
 customer --> UC4
+librarian --> UC3
+UC2a <. UC2 : includes
+librarian --> UC2
+UC2 .> UC2b : includes
+librarian --> UC1
 @enduml
