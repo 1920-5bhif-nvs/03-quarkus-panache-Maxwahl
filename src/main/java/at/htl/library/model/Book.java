@@ -37,6 +37,8 @@ public class Book extends Item{
         objectNode.put("price",this.getPrice());
         objectNode.put("author",this.getAuthor());
         objectNode.put("pages",this.getPages());
+        objectNode.put("class",Book.class.getCanonicalName());
+
         return objectNode;
     }
     //endregion

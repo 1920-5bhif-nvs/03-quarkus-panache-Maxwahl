@@ -38,6 +38,8 @@ public class CD extends Item {
         objectNode.put("price",this.getPrice());
         objectNode.put("composer",this.getComposer());
         objectNode.put("runtime",this.getRuntime());
+        objectNode.put("class",CD.class.getCanonicalName());
+
         return objectNode;
     }
     //endregion
